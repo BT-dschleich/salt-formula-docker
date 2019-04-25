@@ -1,10 +1,10 @@
 {% from "docker/map.jinja" import host with context %}
 
-{%- if host.enabled %}
+{%- if host.get('enabled', False) %}
 
 docker_packages:
   pkg.installed:
-  - pkgs: {{ host.pkgs }}
+  - pkgs: {{ host.pkgs | json }}
 
 {%- if grains.get('virtual_subtype', None) not in ['Docker', 'LXC'] %}
 
